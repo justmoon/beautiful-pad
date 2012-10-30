@@ -1,0 +1,25 @@
+{
+  "name": "beautiful-pad",
+  "version": "0.1.0",
+  "author": "Stefan Thomas <justmoon@members.fsf.org>",
+  "keywords": ["docs","markdown","editor","realtime","live","preview"],
+  "description": "A markdown editor with live preview",
+
+  "repository" : {
+    "type" : "git",
+    "url" : "https://github.com/justmoon/beautiful-pad.git"
+  },
+
+  "dependencies": {
+    "marked": "=0.2.5",
+    "highlight": "=0.2.3"
+  },
+
+  "main": "index.html",
+
+  "window": {
+    "toolbar": false,
+    "width": 1170,
+    "height": 700
+  }
+}

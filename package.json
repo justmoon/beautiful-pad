@@ -1,6 +1,6 @@
 {
   "name": "beautiful-pad",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "author": "Stefan Thomas <justmoon@members.fsf.org>",
   "keywords": ["docs","markdown","editor","realtime","live","preview"],
   "description": "A markdown editor with live preview",

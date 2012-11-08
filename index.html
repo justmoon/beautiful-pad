@@ -22,29 +22,11 @@ body {
 </style>
 <div id="editor"></div>
 <div id="preview"></div>
+<input style="display:none;" id="fileOpenDialog" type="file" />
+<input style="display:none;" id="fileSaveAsDialog" type="file" nwsaveas />
 <link rel="stylesheet" href="style/markdown.css" type="text/css"></link>
 <link rel="stylesheet" href="style/highlight.css" type="text/css"></link>
-<script>
-var marked = require("marked");
-var highlight = require("highlight").Highlight;
-var fs = require("fs");
-</script>
+<script src="src/jquery/jquery.js" type="text/javascript" charset="utf-8"></script>
 <script src="src/ace/ace.js" type="text/javascript" charset="utf-8"></script>
 <script src="src/ace/mode-markdown.js" type="text/javascript" charset="utf-8"></script>
-<script>
-var editor = ace.edit("editor");
-var session = editor.getSession();
-editor.setFontSize(15);
-var MarkdownMode = require("ace/mode/markdown").Mode;
-session.setValue(fs.readFileSync("welcome.md", "utf-8"));
-session.setMode(new MarkdownMode());
-session.setUseWrapMode(true);
-function updatePreview () {
-  var code = editor.getSession().getValue();
-  code = marked(code);
-  code = highlight(code, false, true);
-  document.getElementById('preview').innerHTML = code;
-};
-editor.on('change', updatePreview);
-updatePreview();
-</script>
+<script src="main.js" type="text/javascript" charset="utf-8"></script>

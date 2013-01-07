@@ -9,6 +9,7 @@ var isDirty = false;
 var currentFile = null;
 
 // Setup menu
+var win = gui.Window.get();
 var menubar = new gui.Menu({type: 'menubar'});
 var filemenu = new gui.Menu();
 filemenu.append(new gui.MenuItem({label: 'New', click: newFile}));
@@ -18,12 +19,12 @@ filemenu.append(new gui.MenuItem({label: 'Save', click: saveFile}));
 filemenu.append(new gui.MenuItem({label: 'Save As...', click: saveFileAs}));
 filemenu.append(new gui.MenuItem({label: 'Revert', click: revertFile}));
 filemenu.append(new gui.MenuItem({ type: 'separator' }));
-filemenu.append(new gui.MenuItem({label: 'Quit'}));
+filemenu.append(new gui.MenuItem({label: 'Quit', click: quitApp}));
 var helpmenu = new gui.Menu();
 helpmenu.append(new gui.MenuItem({label: 'About', click: showAbout}));
 menubar.append(new gui.MenuItem({label: 'File', submenu: filemenu}));
 menubar.append(new gui.MenuItem({label: 'Help', submenu: helpmenu}));
-gui.Window.get().menu = menubar;
+win.menu = menubar;
 
 // Setup editor
 var editor = ace.edit("editor");
@@ -71,6 +72,10 @@ function closeFile() {
   }
 };
 
+function quitApp() {
+  win.close();
+};
+
 function revertFile() {
   session.setValue(cleanState);
   setDirty(false);
@@ -105,7 +110,6 @@ function setDirty(dirty) {
 
 function updateTitle() {
   var title = null !== currentFile ? path.basename(currentFile) : "Empty";
-  var win = gui.Window.get();
   win.title = (isDirty ? "* " : "") + title;
 };
 
@@ -120,7 +124,7 @@ function showAbout() {
   jswin.document.write(aboutHtml);
   nwwin.setResizable(false);
 
-  centerWinOnWin(gui.Window.get(), nwwin);
+  centerWinOnWin(win, nwwin);
 };
 
 function centerWinOnWin(winA, winB) {
@@ -129,3 +133,9 @@ function centerWinOnWin(winA, winB) {
   winB.x = centerX - winB.width / 2;
   winB.y = centerY - winB.height / 2;
 };
+
+win.on('close', function(){
+  if (!isDirty || confirm("You have unsaved changes, are you sure you wish you exit the application?")) {
+    win.close(true);
+  }
+});

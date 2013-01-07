@@ -18,6 +18,7 @@
   "main": "index.html",
 
   "window": {
+    "icon": "res/icon/256x256/context/beautiful-pad.png",
     "toolbar": false,
     "width": 1170,
     "height": 700
